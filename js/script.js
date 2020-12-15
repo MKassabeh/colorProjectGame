@@ -45,6 +45,8 @@ for (let index = 0; index < squarecolor.length; index++) {
     })
 }
 
+
+
 resetColor.addEventListener('click',function(){
     squarecolor.forEach(element => {
         resetColor.textContent="New Color"
@@ -70,7 +72,11 @@ easymode.addEventListener('click',function() {
             var g=randomColor()
             var b=randomColor()
             score.textContent='rgb('+r+', '+g+', '+b+')' ;
-            squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';    
+            squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';   
+            resetColor.textContent="New Color"
+            titleman.style.backgroundColor="steelblue"
+            winningmessage.textContent="";
+
             
         }else{
             squarecolor[index].style.visibility="hidden"
@@ -86,5 +92,16 @@ easymode.addEventListener('click',function() {
 hardmode.addEventListener('click',function() {
     easymode.classList.remove('selected')
     hardmode.classList.add('selected')
-    
+    squarecolor.forEach(element => {
+        element.style.visibility="visible"
+        var r=randomColor()
+        var g=randomColor()
+        var b=randomColor()
+        score.textContent='rgb('+r+', '+g+', '+b+')' ;
+        element.style.backgroundColor='rgb('+r+', '+g+', '+b+')';    
+        resetColor.textContent="New Color"
+        titleman.style.backgroundColor="steelblue"
+        winningmessage.textContent="";
+
+    });
 })
