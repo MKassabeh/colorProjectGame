@@ -4,7 +4,9 @@ var squarecolor =document.querySelectorAll(".square");
 var score = document.getElementById('colorDisplay');
 var resetColor = document.getElementById("reset");
 var titleman=document.getElementById("mainTitle");
-var winningmessage=document.getElementById("message")
+var winningmessage=document.getElementById("message");
+var easymode = document.getElementById("modeEasy");
+var hardmode=document.getElementById("mode");
 // Couleur aléatoire 
 
 
@@ -12,6 +14,7 @@ function randomColor(){
     var color = Math.floor(Math.random() * 255) + 1
     return color
 }
+
 
 // Début du jeu 
 
@@ -37,6 +40,7 @@ for (let index = 0; index < squarecolor.length; index++) {
         })
     }else{
         squarecolor[index].style.visibility="hidden"
+        winningmessage.textContent="Retry !"
     }
     })
 }
@@ -53,5 +57,34 @@ resetColor.addEventListener('click',function(){
         score.textContent='rgb('+r+', '+g+', '+b+')';
     });
     
+    
+})
+
+
+easymode.addEventListener('click',function() {
+    hardmode.classList.remove('selected')
+    easymode.classList.add('selected')
+    for (let index = 0; index < squarecolor.length; index++) {
+        if(index<=2){
+            var r=randomColor()
+            var g=randomColor()
+            var b=randomColor()
+            score.textContent='rgb('+r+', '+g+', '+b+')' ;
+            squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';    
+            
+        }else{
+            squarecolor[index].style.visibility="hidden"
+        }
+
+    }
+
+    
+})
+
+
+
+hardmode.addEventListener('click',function() {
+    easymode.classList.remove('selected')
+    hardmode.classList.add('selected')
     
 })
