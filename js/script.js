@@ -7,84 +7,94 @@ var titleman=document.getElementById("mainTitle");
 var winningmessage=document.getElementById("message");
 var easymode = document.getElementById("modeEasy");
 var hardmode=document.getElementById("mode");
+var answer = Math.floor(Math.random() * squarecolor.length)
+
 // Couleur aléatoire 
 
-
 function randomColor(){
-    var color = Math.floor(Math.random() * 255) + 1
+    var color = Math.floor(Math.random() * 255)
     return color
 }
 
-
+function easyMode(){
+    if(easymode.classList="selected"){
+        for (let index = 0; index < squarecolor.length; index++) {
+            if(index<=2){
+                var r=randomColor()
+                var g=randomColor()
+                var b=randomColor()
+                score.textContent='rgb('+r+', '+g+', '+b+')' ;
+                squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';   
+                resetColor.textContent="New Color"
+                titleman.style.backgroundColor="steelblue"
+                winningmessage.textContent="";
+                squarecolor[index].style.visibility="visible"
+            }else{
+                squarecolor[index].style.visibility="hidden"
+            }
+    
+        }
+    }
+    
+}
 // Début du jeu 
 
 
-for (let index = 0; index < squarecolor.length; index++) {
 
+for (let index = 0; index < squarecolor.length; index++) {
+    if(answer=index){
+        console.log(answer)
+        score.textContent='rgb('+r+', '+g+', '+b+')' ;
+    }
     var r=randomColor()
     var g=randomColor()
     var b=randomColor()
-    score.textContent='rgb('+r+', '+g+', '+b+')' ;
     squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';
-   
     squarecolor[index].addEventListener('click',function(){
         if(squarecolor[index].style.backgroundColor===score.textContent){
-            
-            squarecolor.forEach(element => {
+                squarecolor.forEach(element => {
                 winningmessage.textContent="Correct!"
                 resetColor.textContent="Play Again ?"
                 titleman.style.backgroundColor=score.textContent
                 element.style.visibility="visible";
                 element.style.backgroundColor=score.textContent
                 
-        })
-    }else{
+    })
+        }else{
         squarecolor[index].style.visibility="hidden"
         winningmessage.textContent="Retry !"
-    }
+        }
     })
 }
 
 
 
 resetColor.addEventListener('click',function(){
-    squarecolor.forEach(element => {
+    
         resetColor.textContent="New Color"
         titleman.style.backgroundColor="steelblue"
         winningmessage.textContent="";
-        var r=randomColor()
-        var g=randomColor()
-        var b=randomColor()
-        element.style.backgroundColor='rgb('+r+', '+g+', '+b+')';
-        score.textContent='rgb('+r+', '+g+', '+b+')';
-    });
-    
-    
+        squarecolor.forEach(element => {
+        if(easymode.className==="selected"){
+            easymode.classList.add('selected')
+            console.log('hi')
+            easyMode()
+        }
+        else{
+            easymode.classList.remove('selected')
+            var r=randomColor()
+            var g=randomColor()
+            var b=randomColor()
+            element.style.backgroundColor='rgb('+r+', '+g+', '+b+')';
+            score.textContent='rgb('+r+', '+g+', '+b+')';
+        }
+    });    
 })
-
 
 easymode.addEventListener('click',function() {
     hardmode.classList.remove('selected')
     easymode.classList.add('selected')
-    for (let index = 0; index < squarecolor.length; index++) {
-        if(index<=2){
-            var r=randomColor()
-            var g=randomColor()
-            var b=randomColor()
-            score.textContent='rgb('+r+', '+g+', '+b+')' ;
-            squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';   
-            resetColor.textContent="New Color"
-            titleman.style.backgroundColor="steelblue"
-            winningmessage.textContent="";
-
-            
-        }else{
-            squarecolor[index].style.visibility="hidden"
-        }
-
-    }
-
-    
+    easyMode() 
 })
 
 
