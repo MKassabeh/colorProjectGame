@@ -6,8 +6,8 @@ var resetColor = document.getElementById("reset");
 var titleman=document.getElementById("mainTitle");
 var winningmessage=document.getElementById("message");
 var easymode = document.getElementById("modeEasy");
-var hardmode=document.getElementById("mode");
-var answer = Math.floor(Math.random() * squarecolor.length)
+    var hardmode=document.getElementById("mode");
+    var answer = Math.floor(Math.random() * squarecolor.length)
 
 // Couleur aléatoire 
 
@@ -40,33 +40,37 @@ function easyMode(){
 // Début du jeu 
 
 
-
 for (let index = 0; index < squarecolor.length; index++) {
-    if(answer=index){
-        console.log(answer)
-        score.textContent='rgb('+r+', '+g+', '+b+')' ;
-    }
+
     var r=randomColor()
     var g=randomColor()
     var b=randomColor()
-    squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';
-    squarecolor[index].addEventListener('click',function(){
-        if(squarecolor[index].style.backgroundColor===score.textContent){
-                squarecolor.forEach(element => {
-                winningmessage.textContent="Correct!"
-                resetColor.textContent="Play Again ?"
-                titleman.style.backgroundColor=score.textContent
-                element.style.visibility="visible";
-                element.style.backgroundColor=score.textContent
-                
-    })
-        }else{
-        squarecolor[index].style.visibility="hidden"
-        winningmessage.textContent="Retry !"
-        }
-    })
-}
+    
+    if(answer===index){
+        score.textContent='rgb('+r+', '+g+', '+b+')'
+        squarecolor[answer].style.backgroundColor=score.textContent
+    }else{
+        squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';
+    }
+        // click on square 
 
+        squarecolor[index].addEventListener('click',function(){
+            if(squarecolor[index].style.backgroundColor===score.textContent){
+                    squarecolor.forEach(element => {
+                        winningmessage.textContent="Correct!"
+                        resetColor.textContent="Play Again ?"
+                        titleman.style.backgroundColor=score.textContent
+                        element.style.visibility="visible";
+                        element.style.backgroundColor=score.textContent
+                    
+                    })
+            }else{
+            squarecolor[index].style.visibility="hidden"
+            winningmessage.textContent="Retry !"
+            }
+        })
+
+}
 
 
 resetColor.addEventListener('click',function(){
@@ -77,7 +81,6 @@ resetColor.addEventListener('click',function(){
         squarecolor.forEach(element => {
         if(easymode.className==="selected"){
             easymode.classList.add('selected')
-            console.log('hi')
             easyMode()
         }
         else{
