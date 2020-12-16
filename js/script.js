@@ -17,8 +17,7 @@ function randomColor(){
 }
 
 function easyMode(){
-    var answer = Math.floor(Math.random() *3)
-    console.log(answer)    
+    var answer = Math.floor(Math.random() *3) 
     if(easymode.classList="selected"){
         for (let index = 0; index < squarecolor.length; index++) {    
             if(index<=2){
@@ -85,28 +84,33 @@ resetColor.addEventListener('click',function(){
     resetColor.textContent="New Color"
     titleman.style.backgroundColor="steelblue"
     winningmessage.textContent="";
-    if(easymode.className==="selected"){
-        easymode.classList.add('selected')
-        easyMode()
+    var answer = Math.floor(Math.random() * squarecolor.length)
+    for (let index = 0; index < squarecolor.length; index++) {
+        if(easymode.className==="selected"){
+            easymode.classList.add('selected')
+            easyMode()
+            
+        }else{
+            easymode.classList.remove('selected')
+            
+            squarecolor[index].style.visibility="visible"
+            for (let index = 0; index < squarecolor.length; index++) {
+                var r=randomColor()
+                var g=randomColor()
+                var b=randomColor()
+                
+                if(answer===index){
+                score.textContent='rgb('+r+', '+g+', '+b+')'
+                squarecolor[answer].style.backgroundColor=score.textContent
+                }else{
+                    squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';
+                }  
+                
+            } 
+        }
         
-    }else{
-        easymode.classList.remove('selected')
-        var answer = Math.floor(Math.random() * squarecolor.length)
-        for (let index = 0; index < squarecolor.length; index++) {
-            var r=randomColor()
-            var g=randomColor()
-            var b=randomColor()
-            
-            if(answer===index){
-            score.textContent='rgb('+r+', '+g+', '+b+')'
-            squarecolor[answer].style.backgroundColor=score.textContent
-            console.log(answer)
-            }else{
-                squarecolor[index].style.backgroundColor='rgb('+r+', '+g+', '+b+')';
-            }  
-            
-        } 
     }
+
 });    
 
 
